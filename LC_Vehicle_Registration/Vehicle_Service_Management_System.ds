@@ -1,0 +1,2209 @@
+/*
+ * Author       : hariprasanna.s.2024.aiml1809
+ * Generated on : 21-Oct-2026 11:09:18
+ * Version      : 1.0
+ */
+ application "Vehicle Service Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form service_bay
+		{
+			displayname = "Service Bay"
+			success message = "Service Bay Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			bay_name
+			(
+    			type = text
+				displayname = "Bay Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			capacity
+			(
+				type = number
+				displayname = "Capacity"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			current_status
+			(
+				type = picklist
+				displayname = "Current Status"
+				values = {"Occupied","Available","Maintenance"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_request
+			(
+				type = list	
+				displayname = "Assigned Request"
+				values  = service_request.ID
+    			displayformat = [request_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			maintenance_schedule
+			(
+    			type = textarea
+				displayname = "Maintenance Schedule"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			last_maintenance_date
+			(
+    			type = date
+				displayname = "Last Maintenance Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			next_maintenance_date
+			(
+    			type = date
+				displayname = "Next Maintenance Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			bay_type
+			(
+				type = picklist
+				displayname = "Bay Type"
+				values = {"Heavy Duty","Standard","Specialized"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			notes
+			(
+    			type = textarea
+				displayname = "Notes"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form service_request
+		{
+			displayname = "Service Request"
+			success message = "Service Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			request_id
+			(
+    			type = text
+				displayname = "Request Id"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			owner_name
+			(
+    			type = name
+				displayname = "Owner Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			vehicle_registration_number
+			(
+    			type = text
+				displayname = "Vehicle Registration Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			vehicle_type
+			(
+				type = picklist
+				displayname = "Vehicle Type"
+				values = {"Van","SUV","Pickup","Coupe","Hatchback","Sedan","MUV","Other"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email_address
+			(
+    			type = email
+				displayname = "Email Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			pickup_address
+			(
+    			type = address
+				displayname = "Pickup Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+	     			 visibility = false
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+	     			 visibility = false
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+	     			 visibility = false
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+	     			 visibility = false
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+	     			 visibility = false
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "Latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "Longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			odometer_reading
+			(
+				type = number
+				displayname = "Odometer Reading"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			service_type
+			(
+				type = picklist
+				displayname = "Service Type"
+				values = {"Breakdown Repair","Accident Repair","Routine Service"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			additional_services_requested
+			(
+				type = list	
+				displayname = "Additional Services Requested"
+				values = {"Wheel Alignment","Tyre Rotation","Oil Change","Car Wash","Interior Cleaning","AC Service"}
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			issue_description
+			(
+    			type = textarea
+				displayname = "Issue Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_service_date
+			(
+    			type = date
+				displayname = "Preferred Service Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_dropoff_time
+			(
+    			type = time
+				displayname = "Preferred Dropoff Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			authorize_estimate_and_repair
+			(
+    			type = checkbox
+				displayname = "Authorize Estimate And Repair"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			status
+			(
+				type = picklist
+				displayname = "Status"
+				values = {"Requested","In Diagnosis","Delivered","In Repair","Ready for Pickup"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			diagnosis_status
+			(
+				type = picklist
+				displayname = "Diagnosis Status"
+				values = {"Completed","In Progress","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			repair_status
+			(
+				type = picklist
+				displayname = "Repair Status"
+				values = {"Completed","In Progress","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ready_for_pickup_status
+			(
+				type = picklist
+				displayname = "Ready For Pickup Status"
+				values = {"Ready","Notified","Not Ready"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_technician
+			(
+    			type = text
+				displayname = "Assigned Technician"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_service_bay
+			(
+    			type = text
+				displayname = "Assigned Service Bay"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			estimated_cost
+			(
+				displayname = "Estimated Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			actual_cost
+			(
+				displayname = "Actual Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			insurance_document
+			(
+    			type = text
+				displayname = "Insurance Document"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			damage_photos
+			(
+    			type = text
+				displayname = "Damage Photos"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			submitted_on
+			(
+    			type = datetime
+				displayname = "Submitted On"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			last_status_updated
+			(
+    			type = datetime
+				displayname = "Last Status Updated"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Service Request Received","Initial Assessment","Request Rejected","Diagnosis Required","Diagnosis Completed","Estimate Generation","Awaiting Approval","Repair Scheduled","Repair In Progress","Repair Completed","Quality Assurance Check","Ready for Pickup","Vehicle Delivered","Service Request Closed"}
+			}
+		}
+		form technician_profile
+		{
+			displayname = "Technician Profile"
+			success message = "Technician Profile Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			technician_name
+			(
+    			type = name
+				displayname = "Technician Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			employee_id
+			(
+    			type = text
+				displayname = "Employee Id"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			specialization
+			(
+				type = picklist
+				displayname = "Specialization"
+				values = {"Bodywork","General","Electrical","Engine","Tire"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			phone_number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email_address
+			(
+    			type = email
+				displayname = "Email Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			current_status
+			(
+				type = picklist
+				displayname = "Current Status"
+				values = {"In Service","On Leave","Available"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_bay
+			(
+    			type = text
+				displayname = "Assigned Bay"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			hire_date
+			(
+    			type = date
+				displayname = "Hire Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			hourly_rate
+			(
+				displayname = "Hourly Rate"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			notes
+			(
+    			type = textarea
+				displayname = "Notes"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		list service_bay_Report
+		{
+			displayName = "All Service Bays"
+			show all rows from service_bay    
+			(
+				bay_name as "Bay Name"
+				capacity as "Capacity"
+				current_status as "Current Status"
+				assigned_request as "Assigned Request"
+				maintenance_schedule as "Maintenance Schedule"
+				last_maintenance_date as "Last Maintenance Date"
+				next_maintenance_date as "Next Maintenance Date"
+				bay_type as "Bay Type"
+				notes as "Notes"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (current_status == "Available")
+				fields = [current_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (current_status == "Maintenance")
+				fields = [current_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (current_status == "Occupied")
+				fields = [current_status]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban service_bay_by_current_status
+		{
+			displayName = "Current Statuses"
+			show all rows from service_bay    
+			(
+				bay_name as "Bay Name"
+				capacity as "Capacity"
+				current_status as "Current Status"
+				assigned_request as "Assigned Request"
+				maintenance_schedule as "Maintenance Schedule"
+				last_maintenance_date as "Last Maintenance Date"
+				next_maintenance_date as "Next Maintenance Date"
+				bay_type as "Bay Type"
+				notes as "Notes"
+			)
+			options
+			(
+	 			display field = current_status
+	 		)
+		}
+		list technician_profile_Report
+		{
+			displayName = "All Technician Profiles"
+			show all rows from technician_profile    
+			(
+				technician_name  as "Technician Name"
+				employee_id as "Employee Id"
+				specialization as "Specialization"
+				phone_number as "Phone Number"
+				email_address as "Email Address"
+				current_status as "Current Status"
+				assigned_bay as "Assigned Bay"
+				hire_date as "Hire Date"
+				hourly_rate as "Hourly Rate"
+				(
+					display = total,average,min,max	
+				)
+				notes as "Notes"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (specialization == "Bodywork")
+				fields = [specialization]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (specialization == "Engine")
+				fields = [specialization]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (specialization == "Tire")
+				fields = [specialization]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban technician_profile_by_specialization
+		{
+			displayName = "Specializations"
+			show all rows from technician_profile    
+			(
+				technician_name  as "Technician Name"
+				employee_id as "Employee Id"
+				specialization as "Specialization"
+				phone_number as "Phone Number"
+				email_address as "Email Address"
+				current_status as "Current Status"
+				assigned_bay as "Assigned Bay"
+				hire_date as "Hire Date"
+				hourly_rate as "Hourly Rate"
+				(
+					display = total,average,min,max	
+				)
+				notes as "Notes"
+			)
+			options
+			(
+	 			display field = specialization
+	 		)
+		}
+		list service_request_Report
+		{
+			displayName = "All Service Requests"
+			show all rows from service_request    
+			(
+				request_id as "Request Id"
+				owner_name  as "Owner Name"
+				vehicle_registration_number as "Vehicle Registration Number"
+				vehicle_type as "Vehicle Type"
+				email_address as "Email Address"
+				contact_number as "Contact Number"
+				pickup_address  as "Pickup Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				odometer_reading as "Odometer Reading"
+				service_type as "Service Type"
+				additional_services_requested as "Additional Services Requested"
+				issue_description as "Issue Description"
+				preferred_service_date as "Preferred Service Date"
+				preferred_dropoff_time as "Preferred Dropoff Time"
+				authorize_estimate_and_repair as "Authorize Estimate And Repair"
+				status as "Status"
+				diagnosis_status as "Diagnosis Status"
+				repair_status as "Repair Status"
+				ready_for_pickup_status as "Ready For Pickup Status"
+				assigned_technician as "Assigned Technician"
+				assigned_service_bay as "Assigned Service Bay"
+				estimated_cost as "Estimated Cost"
+				(
+					display = total,average,min,max	
+				)
+				actual_cost as "Actual Cost"
+				(
+					display = total,average,min,max	
+				)
+				insurance_document as "Insurance Document"
+				damage_photos as "Damage Photos"
+				submitted_on as "Submitted On"
+				last_status_updated as "Last Status Updated"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (service_type == "Accident Repair")
+				fields = [service_type]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (service_type == "Breakdown Repair")
+				fields = [service_type]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban service_request_by_vehicle_type
+		{
+			displayName = "Vehicle Types"
+			show all rows from service_request    
+			(
+				request_id as "Request Id"
+				owner_name  as "Owner Name"
+				vehicle_registration_number as "Vehicle Registration Number"
+				vehicle_type as "Vehicle Type"
+				email_address as "Email Address"
+				contact_number as "Contact Number"
+				pickup_address  as "Pickup Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				odometer_reading as "Odometer Reading"
+				service_type as "Service Type"
+				additional_services_requested as "Additional Services Requested"
+				issue_description as "Issue Description"
+				preferred_service_date as "Preferred Service Date"
+				preferred_dropoff_time as "Preferred Dropoff Time"
+				authorize_estimate_and_repair as "Authorize Estimate And Repair"
+				status as "Status"
+				diagnosis_status as "Diagnosis Status"
+				repair_status as "Repair Status"
+				ready_for_pickup_status as "Ready For Pickup Status"
+				assigned_technician as "Assigned Technician"
+				assigned_service_bay as "Assigned Service Bay"
+				estimated_cost as "Estimated Cost"
+				(
+					display = total,average,min,max	
+				)
+				actual_cost as "Actual Cost"
+				(
+					display = total,average,min,max	
+				)
+				insurance_document as "Insurance Document"
+				damage_photos as "Damage Photos"
+				submitted_on as "Submitted On"
+				last_status_updated as "Last Status Updated"
+			)
+			options
+			(
+	 			display field = vehicle_type
+	 		)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#F97164'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '64%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginTop = '8px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.technician_profile.hourly_rate.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '8px' \n\tmarginTop = '0px'\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Total Hourly Rate'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '36%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#C75A50'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-percentage-39'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#EEA131'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.service_request.estimated_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Total Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#BE8127'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#00CFA9'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.service_request.actual_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Total Actual Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#0BA385'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#3E99DE'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '65%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.service_bay.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FFFFFF'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Total Service Bays'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '35%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '10px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#0E78C9'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'travel-world'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Grouped_Panel 1'\n \n\t\n\ttitle = 'Bay Type'\n\t\n\t\ttitleSize = '15px'\n            boldTitle = 'true'\n\t\ttitleColor = '#222326'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#F97164'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-money-time'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'transparent'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tcolor = '#C75A50'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'bay_type == &quot;Heavy Duty&quot;'\n\t  value = 'thisapp.service_bay.bay_type.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Heavy Duties'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#EEA131'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-law'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'transparent'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#BE8127'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'bay_type == &quot;Standard&quot;'\n\t  value = 'thisapp.service_bay.bay_type.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Standards'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#00CFA9'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'design-mobile-design'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'transparent'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#0BA385'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'bay_type == &quot;Specialized&quot;'\n\t  value = 'thisapp.service_bay.bay_type.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Specialized'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpadding = '20px'\n\tbgColor = 'transparent'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#3E99DE'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'travel-world'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\tpaddingLeft = '10px'\n\tbgColor = 'transparent'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tcolor = '#0E78C9'\n\tsize = '28px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.service_bay.bay_type.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '10px'\n\tmarginRight = '0px' \n\tmarginTop = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\n\n\n\n\n\n\t  value = 'Total'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel_Button 1'\n \n\t\n\ttitle = 'Quick Links'\n\t\n\t\ttitleSize = '15px'\n            boldTitle = 'true'\n\t\ttitleColor = '#222326'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'service_bay'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'transparent'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'service_bay'\n\t\ttarget = 'new-window'\n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#595959'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#595959'\n    borderWidth = '0px'\n\n\t  value = 'Add New Service Bay'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='27%'\n   \t>\n\t<panel elementName='Panel_Button 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'technician_profile'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'transparent'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'technician_profile'\n\t\ttarget = 'new-window'\n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#3F3F3F'\n    borderWidth = '0px'\n\n\t  value = 'Add New Technician Profile'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<panel elementName='Panel_Button 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenForm'\n\t\tcomponentLinkName = 'service_request'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'transparent'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'service_request'\n\t\ttarget = 'new-window'\n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#3F3F3F'\n    borderWidth = '0px'\n\n\t  value = 'Add New Service Request'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel_Button 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#CB6711'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n    action = 'OpenReport'\n\t\tcomponentLinkName = 'service_bay_Report'\n\t\ttarget = 'new-window'\n\t\twidth = '98%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '6px' \n\n\tcolor = '#3F3F3F'\n\tbgColor = 'transparent'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '14px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenReport'\n\t\tcomponentLinkName = 'service_bay_Report'\n\t\ttarget = 'new-window'\n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#3F3F3F'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#3F3F3F'\n    borderWidth = '0px'\n\n\t  value = 'Show All Service Bays'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Bay Type by Capacity'\n\t\n\t\ttitleSize = '16px'\n\t\ttitleColor = '#222326'\n\ttype = 'Bar'\n\txtitle = 'Bay Type'\n\tytitle = 'Capacity'\n\tbgColor = '#FFFFFF'\n\ttheme = '#F37D16'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'service_bay'\n\txfield = 'bay_type'\n\tyfields = 'sum:capacity'\n\tgroupBy = 'bay_name'\n\t\tDelugeCriteria = 'bay_type is not null &amp;&amp; bay_type != &quot;&quot;'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Distribution by Current Status'\n\t\n\t\ttitleSize = '16px'\n\t\ttitleColor = '#222326'\n\ttype = 'Pie'\n\txtitle = 'Current Status'\n\tytitle = 'Current Status'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'service_bay'\n\txfield = 'current_status'\n\tyfields = 'count:current_status'\n\tgroupBy = 'bay_name'\n\t\tDelugeCriteria = 'current_status is not null &amp;&amp; current_status != &quot;&quot;'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'service_bay_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			auto_assign_technician as "Auto-Assign Technician on Request"
+			{
+				type =  form
+				form = service_request
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the current vehicle type from input
+										vehicleType = input.vehicle_type;
+										// Fetch all technicians with status 'Available'
+										availableTechnicians = technician_profile[current_status == "Available"];
+										// Initialize variables for matching technician
+										matchedTechnician = null;
+										specializationMap = {"Breakdown Repair":"General","Accident Repair":"Bodywork","Routine Service":"General"};
+										// Determine required specialization based on service type
+										requiredSpecialization = "";
+										if(input.service_type == "Breakdown Repair")
+										{
+											requiredSpecialization = "General";
+										}
+										else if(input.service_type == "Accident Repair")
+										{
+											requiredSpecialization = "Bodywork";
+										}
+										else if(input.service_type == "Routine Service")
+										{
+											requiredSpecialization = "General";
+										}
+										// Iterate through available technicians to find a match
+										for each  technician in availableTechnicians
+										{
+											// Check if technician specialization matches required specialization
+											if(technician.specialization == requiredSpecialization)
+											{
+												matchedTechnician = technician;
+												break;
+											}
+										}
+										// If no match found with specialization, assign first available technician
+										if(matchedTechnician == null && availableTechnicians.count() > 0)
+										{
+											matchedTechnician = availableTechnicians;
+										}
+										// Update the assigned_technician field with the matched technician's name
+										if(matchedTechnician != null)
+										{
+											input.assigned_technician = matchedTechnician.technician_name.first_name + " " + matchedTechnician.technician_name.last_name;
+										}
+						)
+					}
+				}
+
+			}
+			validate_service_date as "Validate Service Date Before Submit"
+			{
+				type =  form
+				form = service_request
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if preferred_service_date field is provided and not null
+										if(input.preferred_service_date.isNull())
+										{
+											// Field is blank, allow submission or handle as needed
+											// No action required for blank date
+										}
+										else
+										{
+											// Get the current date for comparison
+											currentDate = today;
+											// Compare preferred service date with current date
+											if(input.preferred_service_date < currentDate)
+											{
+												// Display error message before canceling submission
+												alert "Error: Preferred service date cannot be in the past. Please select a future date.";
+												// Cancel the form submission
+												cancel submit;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			notify_owner_repair_complete as "Notify Owner on Repair Completion"
+			{
+				type =  form
+				form = service_request
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if repair status is changed to Completed
+										if(input.repair_status == "Completed")
+										{
+											// Fetch owner name from the request
+											ownerName = input.owner_name.first_name;
+											ownerEmail = input.email_address;
+											// Prepare email subject and message
+											subject = "Your Vehicle Repair is Complete";
+											message = "Dear " + ownerName + ",\n\nYour vehicle repair has been completed. Please contact us to pick up your vehicle.";
+											// Send email to the owner
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :ownerEmail
+												subject :subject
+												message :message
+											]
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			daily_bay_maintenance_reminder as "Daily Bay Maintenance Reminder"
+			{
+				type =  schedule
+				form = service_bay
+					status = inactive
+				start = next_maintenance_date at "10:00:00"
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Get the next maintenance date from input
+										nextMaintenanceDate = input.next_maintenance_date;
+										// Get current date and time
+										currentTime = zoho.currenttime;
+										// Calculate days between current time and next maintenance date
+										daysRemaining = currentTime.daysBetween(nextMaintenanceDate);
+										// Check if maintenance is within 24 hours (less than 1 day)
+										if(daysRemaining < 1)
+										{
+											// Prepare email subject
+											subject = "Urgent: Vehicle Maintenance Due Soon";
+											// Prepare email message
+											message = "<p>Dear Maintenance Team,</p>";
+											message = message.concat("<p>This is to inform you that the next maintenance for the service bay is scheduled within 24 hours.</p>");
+											message = message.concat("<p><strong>Service Bay:</strong> " + input.bay_name + "</p>");
+											message = message.concat("<p><strong>Next Maintenance Date:</strong> " + nextMaintenanceDate.toString() + "</p>");
+											message = message.concat("<p>Please ensure all preparations are completed in time.</p>");
+											// Send email to maintenance team
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :"maintenance@company.com"
+												subject :subject
+												message :message
+												content type :HTML
+											]
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Customer Service Representative"
+			{
+				name = "Customer Service Representative"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Communicate with vehicle owners regarding service status updates and appointment confirmations. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View"}
+							technician_profile_Report={"View"}
+						}
+					}
+					service_request
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit"}
+							service_request_by_vehicle_type={"View","Edit"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View"}
+							service_bay_by_current_status={"View"}
+						}
+					}
+				}
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Service Coordinator"
+			{
+				name = "Service Coordinator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Review incoming service requests and assign them to available technicians and service bays. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View"}
+							technician_profile_Report={"View"}
+						}
+					}
+					service_request
+					{
+						enabled= Viewall,Modifyall,Import,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit","Delete"}
+							service_request_by_vehicle_type={"View","Edit","Delete"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Modifyall,Import,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View","Edit","Delete"}
+							service_bay_by_current_status={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Service Technician"
+			{
+				name = "Service Technician"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Perform vehicle diagnostics and execute repair tasks based on assigned service requests. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View"}
+							technician_profile_Report={"View"}
+						}
+					}
+					service_request
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit"}
+							service_request_by_vehicle_type={"View","Edit"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View","Edit"}
+							service_bay_by_current_status={"View","Edit"}
+						}
+					}
+				}
+			}
+			"Workshop Manager"
+			{
+				name = "Workshop Manager"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Oversee daily operations including technician schedules and service bay assignments. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Modifyall,Import,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View","Edit","Delete"}
+							technician_profile_Report={"View","Edit","Delete"}
+						}
+					}
+					service_request
+					{
+						enabled= Viewall,Modifyall,Import,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit","Delete"}
+							service_request_by_vehicle_type={"View","Edit","Delete"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Modifyall,Import,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View","Edit","Delete"}
+							service_bay_by_current_status={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Insurance Adjuster"
+			{
+				name = "Insurance Adjuster"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Review accident repair requests and associated damage photos submitted by owners. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View"}
+							technician_profile_Report={"View"}
+						}
+					}
+					service_request
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit"}
+							service_request_by_vehicle_type={"View","Edit"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View"}
+							service_bay_by_current_status={"View"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			"Vehicle Owner"
+			{
+				name = "Vehicle Owner"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Submit service requests with vehicle details and preferred service dates. \n"
+				ModulePermissions
+				{
+					technician_profile
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							technician_profile_by_specialization={"View"}
+							technician_profile_Report={"View"}
+						}
+					}
+					service_request
+					{
+						enabled= Create,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_request_Report={"View","Edit"}
+							service_request_by_vehicle_type={"View","Edit"}
+						}
+					}
+					service_bay
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							service_bay_Report={"View"}
+							service_bay_by_current_status={"View"}
+						}
+					}
+				}
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form service_bay
+			{
+				label placement = left
+			}
+			form service_request
+			{
+				label placement = left
+			}
+			form technician_profile
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report service_bay_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								bay_name as "Bay Name"
+								capacity as "Capacity"
+								current_status as "Current Status"
+								assigned_request as "Assigned Request"
+								maintenance_schedule as "Maintenance Schedule"
+								last_maintenance_date as "Last Maintenance Date"
+								next_maintenance_date as "Next Maintenance Date"
+								bay_type as "Bay Type"
+								notes as "Notes"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								bay_name as "Bay Name"
+								capacity as "Capacity"
+								current_status as "Current Status"
+								assigned_request as "Assigned Request"
+								maintenance_schedule as "Maintenance Schedule"
+								last_maintenance_date as "Last Maintenance Date"
+								next_maintenance_date as "Next Maintenance Date"
+								bay_type as "Bay Type"
+								notes as "Notes"
+							)
+						)
+						datablock2
+						(
+		     				title = "Assigned Request"
+		     				related field = assigned_request
+							fields
+							(
+								request_id as "Request Id"
+								owner_name as "Owner Name"
+								vehicle_registration_number as "Vehicle Registration Number"
+								vehicle_type as "Vehicle Type"
+								email_address as "Email Address"
+								contact_number as "Contact Number"
+								pickup_address as "Pickup Address"
+								odometer_reading as "Odometer Reading"
+								service_type as "Service Type"
+								additional_services_requested as "Additional Services Requested"
+								issue_description as "Issue Description"
+								preferred_service_date as "Preferred Service Date"
+								preferred_dropoff_time as "Preferred Dropoff Time"
+								authorize_estimate_and_repair as "Authorize Estimate And Repair"
+								status as "Status"
+								diagnosis_status as "Diagnosis Status"
+								repair_status as "Repair Status"
+								ready_for_pickup_status as "Ready For Pickup Status"
+								assigned_technician as "Assigned Technician"
+								assigned_service_bay as "Assigned Service Bay"
+								estimated_cost as "Estimated Cost"
+								actual_cost as "Actual Cost"
+								insurance_document as "Insurance Document"
+								damage_photos as "Damage Photos"
+								submitted_on as "Submitted On"
+								last_status_updated as "Last Status Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report service_bay_by_current_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								bay_name as "Bay Name"
+								capacity as "Capacity"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								bay_name as "Bay Name"
+								capacity as "Capacity"
+								current_status as "Current Status"
+								assigned_request as "Assigned Request"
+								maintenance_schedule as "Maintenance Schedule"
+								last_maintenance_date as "Last Maintenance Date"
+								next_maintenance_date as "Next Maintenance Date"
+								bay_type as "Bay Type"
+								notes as "Notes"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report technician_profile_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								technician_name as "Technician Name"
+								employee_id as "Employee Id"
+								specialization as "Specialization"
+								phone_number as "Phone Number"
+								email_address as "Email Address"
+								current_status as "Current Status"
+								assigned_bay as "Assigned Bay"
+								hire_date as "Hire Date"
+								hourly_rate as "Hourly Rate"
+								notes as "Notes"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								technician_name as "Technician Name"
+								employee_id as "Employee Id"
+								specialization as "Specialization"
+								phone_number as "Phone Number"
+								email_address as "Email Address"
+								current_status as "Current Status"
+								assigned_bay as "Assigned Bay"
+								hire_date as "Hire Date"
+								hourly_rate as "Hourly Rate"
+								notes as "Notes"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report technician_profile_by_specialization
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								technician_name as "Technician Name"
+								employee_id as "Employee Id"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								technician_name as "Technician Name"
+								employee_id as "Employee Id"
+								specialization as "Specialization"
+								phone_number as "Phone Number"
+								email_address as "Email Address"
+								current_status as "Current Status"
+								assigned_bay as "Assigned Bay"
+								hire_date as "Hire Date"
+								hourly_rate as "Hourly Rate"
+								notes as "Notes"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report service_request_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								request_id as "Request Id"
+								owner_name as "Owner Name"
+								vehicle_registration_number as "Vehicle Registration Number"
+								vehicle_type as "Vehicle Type"
+								email_address as "Email Address"
+								contact_number as "Contact Number"
+								pickup_address as "Pickup Address"
+								odometer_reading as "Odometer Reading"
+								service_type as "Service Type"
+								additional_services_requested as "Additional Services Requested"
+								issue_description as "Issue Description"
+								preferred_service_date as "Preferred Service Date"
+								preferred_dropoff_time as "Preferred Dropoff Time"
+								authorize_estimate_and_repair as "Authorize Estimate And Repair"
+								status as "Status"
+								diagnosis_status as "Diagnosis Status"
+								repair_status as "Repair Status"
+								ready_for_pickup_status as "Ready For Pickup Status"
+								assigned_technician as "Assigned Technician"
+								assigned_service_bay as "Assigned Service Bay"
+								estimated_cost as "Estimated Cost"
+								actual_cost as "Actual Cost"
+								insurance_document as "Insurance Document"
+								damage_photos as "Damage Photos"
+								submitted_on as "Submitted On"
+								last_status_updated as "Last Status Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								request_id as "Request Id"
+								owner_name as "Owner Name"
+								vehicle_registration_number as "Vehicle Registration Number"
+								vehicle_type as "Vehicle Type"
+								email_address as "Email Address"
+								contact_number as "Contact Number"
+								pickup_address as "Pickup Address"
+								odometer_reading as "Odometer Reading"
+								service_type as "Service Type"
+								additional_services_requested as "Additional Services Requested"
+								issue_description as "Issue Description"
+								preferred_service_date as "Preferred Service Date"
+								preferred_dropoff_time as "Preferred Dropoff Time"
+								authorize_estimate_and_repair as "Authorize Estimate And Repair"
+								status as "Status"
+								diagnosis_status as "Diagnosis Status"
+								repair_status as "Repair Status"
+								ready_for_pickup_status as "Ready For Pickup Status"
+								assigned_technician as "Assigned Technician"
+								assigned_service_bay as "Assigned Service Bay"
+								estimated_cost as "Estimated Cost"
+								actual_cost as "Actual Cost"
+								insurance_document as "Insurance Document"
+								damage_photos as "Damage Photos"
+								submitted_on as "Submitted On"
+								last_status_updated as "Last Status Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report service_request_by_vehicle_type
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								owner_name as "Owner Name"
+								request_id as "Request Id"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								request_id as "Request Id"
+								owner_name as "Owner Name"
+								vehicle_registration_number as "Vehicle Registration Number"
+								vehicle_type as "Vehicle Type"
+								email_address as "Email Address"
+								contact_number as "Contact Number"
+								pickup_address as "Pickup Address"
+								odometer_reading as "Odometer Reading"
+								service_type as "Service Type"
+								additional_services_requested as "Additional Services Requested"
+								issue_description as "Issue Description"
+								preferred_service_date as "Preferred Service Date"
+								preferred_dropoff_time as "Preferred Dropoff Time"
+								authorize_estimate_and_repair as "Authorize Estimate And Repair"
+								status as "Status"
+								diagnosis_status as "Diagnosis Status"
+								repair_status as "Repair Status"
+								ready_for_pickup_status as "Ready For Pickup Status"
+								assigned_technician as "Assigned Technician"
+								assigned_service_bay as "Assigned Service Bay"
+								estimated_cost as "Estimated Cost"
+								actual_cost as "Actual Cost"
+								insurance_document as "Insurance Document"
+								damage_photos as "Damage Photos"
+								submitted_on as "Submitted On"
+								last_status_updated as "Last Status Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Service Bays"
+					icon = "travel-church"
+					form  service_bay
+					{
+						icon = "ui-1-bold-add"
+					}
+					report service_bay_Report
+					{
+						icon = "travel-world"
+					}
+					report service_bay_by_current_status
+					{
+						icon = "health-heartbeat-16"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Technician Profiles"
+					icon = "media-1-polaroid-user"
+					form  technician_profile
+					{
+						icon = "ui-1-bold-add"
+					}
+					report technician_profile_Report
+					{
+						icon = "travel-world"
+					}
+					report technician_profile_by_specialization
+					{
+						icon = "design-2-selection"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Service Requests"
+					icon = "business-scale"
+					form  service_request
+					{
+						icon = "ui-1-bold-add"
+					}
+					report service_request_Report
+					{
+						icon = "travel-world"
+					}
+					report service_request_by_vehicle_type
+					{
+						icon = "envir-car"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			new theme = 4
+			font = "lato"
+			color options
+			{
+				color = "1"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form service_bay
+			{
+				label placement = auto
+			}
+			form service_request
+			{
+				label placement = auto
+			}
+			form technician_profile
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form service_bay
+			{
+				label placement = auto
+			}
+			form service_request
+			{
+				label placement = auto
+			}
+			form technician_profile
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = green
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
